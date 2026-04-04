@@ -181,7 +181,8 @@ def generate_normal_failcount_1d(
     return data.astype(int)
 
 
-if __name__ == "__main__":
+
+def main():
     import matplotlib.pyplot as plt
     import japanize_matplotlib  # noqa: F401  日本語フォント自動設定
     from scipy.stats import norm as sp_norm
@@ -375,3 +376,16 @@ if __name__ == "__main__":
     plt.show()
 
 
+def main2():
+    import matplotlib.pyplot as plt
+    failcount = [100, 80, 50, 20, 5, 1, 0]
+    x = [ -3, -2, -1, 0, 1, 2, 3]
+    print(x)
+    fig, axes = plt.subplots(1, 1, figsize=(9, 16))
+    axes.plot(x, failcount, "o-", color="steelblue", ms=5, label="Fail Count (measured)")
+    axes.grid()
+    plt.show()
+
+
+if __name__ == "__main__":
+    main2()
