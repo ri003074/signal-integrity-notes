@@ -34,5 +34,4 @@ Thumbs.db
 .env.*
 
 # Generated figures
-reflection/reflection_guide.png
-
+*png
