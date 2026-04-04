@@ -65,14 +65,14 @@ def main():
     positions = [(6.0, 7.5), (7.0, 8.0), (8.0, 6.5), (9.0, 7.8)]
     for x, y in positions:
         ax_concept.add_patch(plt.Circle((x, y), 0.25, color="red", alpha=0.7))
-        ax_concept.text(x, y, "✕", ha="center", va="center",
+        ax_concept.text(x, y, "×", ha="center", va="center",
                         fontsize=14, color="white", fontweight="bold")
         ax_concept.text(x, y-0.6, "失敗", ha="center", fontsize=7, color="red")
 
     positions = [(6.5, 5.0), (7.5, 5.5), (8.5, 4.8), (9.5, 5.2)]
     for x, y in positions:
         ax_concept.add_patch(plt.Circle((x, y), 0.25, color="green", alpha=0.7))
-        ax_concept.text(x, y, "○", ha="center", va="center",
+        ax_concept.text(x, y, "O", ha="center", va="center",
                         fontsize=14, color="white", fontweight="bold")
         ax_concept.text(x, y-0.6, "成功", ha="center", fontsize=7, color="green")
 

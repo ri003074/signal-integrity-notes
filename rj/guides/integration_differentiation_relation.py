@@ -47,8 +47,8 @@ def main():
     ax_left_cdf = ax_left.twinx()
 
     # PDF（ヒストグラム、上側）
-    bars = ax_left_pdf.bar(x, pdf_vals, width=(x[1]-x[0])*0.9,
-                           color="steelblue", alpha=0.6, label="PDF（ヒストグラム）")
+    ax_left_pdf.bar(x, pdf_vals, width=(x[1]-x[0])*0.9,
+                    color="steelblue", alpha=0.6, label="PDF（ヒストグラム）")
     ax_left_pdf.plot(x_fine, pdf_fine, "-", color="darkblue", linewidth=2)
 
     # CDF（下側、別軸）

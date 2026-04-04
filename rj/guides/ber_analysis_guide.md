@@ -164,8 +164,6 @@ pdf_numerical = -np.gradient(failcount_float, x)
 
 ## ② Fail Count（中段）
 
-![概念図](https://i.imgur.com/placeholder.png)
-
 ### 何を表しているか
 
 「あるパラメータ x（タイミングマージンや電圧マージン）を変化させたときに、何回テストが失敗するか」を示すカーブです。  
