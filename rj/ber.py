@@ -459,11 +459,17 @@ def main():
     )
 
     plt.tight_layout(rect=(0, 0, 1, 0.96), h_pad=4.5)
-    plt.show()
+
+    # Save figure
+    from pathlib import Path
+    output_path = Path(__file__).parent / "ber_analysis.png"
+    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    print(f"Saved: {output_path}")
 
 
 def main2():
     import matplotlib.pyplot as plt
+    from pathlib import Path
 
     failcount = [100, 80, 50, 20, 5, 1, 0]
     x = [-3, -2, -1, 0, 1, 2, 3]
@@ -471,7 +477,11 @@ def main2():
     fig, axes = plt.subplots(1, 1, figsize=(9, 16))
     axes.plot(x, failcount, "o-", color="steelblue", ms=5, label="Fail Count (measured)")
     axes.grid()
-    plt.show()
+
+    # Save figure
+    output_path = Path(__file__).parent / "ber_analysis_demo.png"
+    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    print(f"Saved: {output_path}")
 
 
 if __name__ == "__main__":

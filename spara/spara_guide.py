@@ -314,7 +314,6 @@ def main():
 
     plt.savefig("spara_guide.png", dpi=150, bbox_inches="tight")
     print("Saved: spara_guide.png")
-    plt.show()
 
 
 if __name__ == "__main__":

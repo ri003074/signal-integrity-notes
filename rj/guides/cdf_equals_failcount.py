@@ -198,7 +198,6 @@ def main():
 
     plt.savefig("cdf_equals_failcount.png", dpi=150, bbox_inches="tight")
     print("Saved: cdf_equals_failcount.png")
-    plt.show()
 
 
 if __name__ == "__main__":

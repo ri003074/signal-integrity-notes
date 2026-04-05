@@ -280,7 +280,6 @@ def main():
 
     plt.savefig("reflection_guide.png", dpi=150, bbox_inches="tight")
     print("Saved: reflection_guide.png")
-    plt.show()
 
 
 if __name__ == "__main__":

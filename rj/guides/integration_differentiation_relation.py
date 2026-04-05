@@ -131,7 +131,6 @@ def main():
 
     plt.savefig("integration_differentiation_relation.png", dpi=150, bbox_inches="tight")
     print("Saved: integration_differentiation_relation.png")
-    plt.show()
 
 
 if __name__ == "__main__":

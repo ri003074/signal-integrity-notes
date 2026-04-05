@@ -161,7 +161,6 @@ def main():
 
     plt.savefig("why_derivative_to_histogram.png", dpi=150, bbox_inches="tight")
     print("Saved: why_derivative_to_histogram.png")
-    plt.show()
 
 
 if __name__ == "__main__":

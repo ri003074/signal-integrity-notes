@@ -206,7 +206,6 @@ def main() -> None:
     output_path = Path(__file__).with_suffix(".png")
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
     print(f"Saved: {output_path}")
-    plt.show()
 
 if __name__ == "__main__":
     main()
