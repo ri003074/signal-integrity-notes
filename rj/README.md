@@ -24,6 +24,7 @@ This app lets you input Fail Count data and visualize:
 |---------|------|
 | `rj/guides/ber_analysis_guide.md` | BER / RJ 解析ガイド |
 | `rj/guides/ber_terminology.md` | `ber.py` に出てくる用語集 |
+| `rj/guides/calculus_easy_guide.md` | 微分と積分のやさしい説明（Fail Count文脈） |
 | `rj/guides/diff_failcount_to_histogram.md` | Fail Count 微分 → ヒストグラムの解説 |
 | `rj/guides/cdf_equals_failcount.py` | CDF = Fail Count の図解スクリプト |
 | `rj/guides/integration_differentiation_relation.py` | 積分・微分の関係図解スクリプト |

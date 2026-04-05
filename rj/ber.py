@@ -462,6 +462,7 @@ def main():
 
     # Save figure
     from pathlib import Path
+
     output_path = Path(__file__).parent / "ber_analysis.png"
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
     print(f"Saved: {output_path}")
@@ -485,4 +486,4 @@ def main2():
 
 
 if __name__ == "__main__":
-    main2()
+    main()
