@@ -133,7 +133,9 @@ axes[1].legend(fontsize=8)
 # 3) Q-transform and RJ fit
 if result.rj is not None:
     axes[2].plot(result.rj["x_fit"], result.rj["q_inv_fit"], "o", color="teal", label="Q^-1(BER)")
-    axes[2].plot(result.rj["x_fit"], result.rj["q_inv_line"], "-", color="tomato", label="linear fit")
+    axes[2].plot(
+        result.rj["x_fit"], result.rj["q_inv_line"], "-", color="tomato", label="linear fit"
+    )
     axes[2].set_title("3) Q-transform and RJ linear fit")
     axes[2].set_ylabel("Q^-1(BER)")
     axes[2].grid(True, alpha=0.35)
@@ -158,4 +160,3 @@ with st.expander("Show processed arrays"):
             "rms_sigma": result.rms_sigma,
         }
     )
-

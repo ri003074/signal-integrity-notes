@@ -87,10 +87,10 @@ def extract_rj(
     result = linregress(x_fit, q_fit)
     slope = result.slope
     intercept = result.intercept
-    r_squared = result.rvalue ** 2
+    r_squared = result.rvalue**2
 
-    sigma_rj = 1.0 / slope          # RJ sigma
-    mu = -intercept / slope          # x where Q^{-1}(BER) = 0, i.e. BER = 50%
+    sigma_rj = 1.0 / slope  # RJ sigma
+    mu = -intercept / slope  # x where Q^{-1}(BER) = 0, i.e. BER = 50%
 
     return {
         "sigma_rj": sigma_rj,
@@ -147,6 +147,7 @@ def generate_normal_failcount_1d(
     """
     Generate 1D fail count data that smoothly decreases from max to min.
 
+
     Uses the complementary CDF of the normal distribution (erfc curve),
     which naturally produces a smooth S-shaped descent from max_fail to min_fail.
     Typical BER-like fail count profile.
@@ -181,12 +182,10 @@ def generate_normal_failcount_1d(
     return data.astype(int)
 
 
-
 def main():
     import matplotlib.pyplot as plt
     import japanize_matplotlib  # noqa: F401  日本語フォント自動設定
     from scipy.stats import norm as sp_norm
-
 
     # --- Generate Fail Count data (with noise) ---
     TRUE_SIGMA = 0.15
@@ -195,8 +194,13 @@ def main():
 
     x = np.linspace(0.0, 1.0, n)
     failcount = generate_normal_failcount_1d(
-        n=n, center=TRUE_CENTER, sigma=TRUE_SIGMA,
-        max_fail=100, min_fail=0, noise_sigma=2.0, seed=7,
+        n=n,
+        center=TRUE_CENTER,
+        sigma=TRUE_SIGMA,
+        max_fail=100,
+        min_fail=0,
+        noise_sigma=2.0,
+        seed=7,
     )
 
     # --- Extract RJ ---
@@ -222,24 +226,43 @@ def main():
     pdf_numerical = np.clip(pdf_numerical, 0, None)
 
     pdf_analytical = 100.0 * sp_norm.pdf(x_fine, loc=TRUE_CENTER, scale=TRUE_SIGMA)
-    pdf_fitted     = 100.0 * sp_norm.pdf(x_fine, loc=rj["mu"],    scale=rj["sigma_rj"])
+    pdf_fitted = 100.0 * sp_norm.pdf(x_fine, loc=rj["mu"], scale=rj["sigma_rj"])
 
     peak_h = 100.0 * sp_norm.pdf(TRUE_CENTER, loc=TRUE_CENTER, scale=TRUE_SIGMA)
 
     # 全体フロータイトル
     fig.suptitle(
         "解析フロー:  ① Histogram  ←  −d/dx  ←  ② Fail Count  →  Q⁻¹(BER)  →  ③ Q-scale  →  σ_RJ",
-        fontsize=10, fontweight="bold",
+        fontsize=10,
+        fontweight="bold",
         bbox=dict(boxstyle="round,pad=0.4", facecolor="lavender", edgecolor="purple", alpha=0.85),
     )
 
     # ─── ① Histogram ───────────────────────────────────────
-    axes[0].bar(x, pdf_numerical, width=(x[1] - x[0]) * 0.9,
-                color="steelblue", alpha=0.6, label="−d(Fail Count)/dx  [numerical]")
-    axes[0].plot(x_fine, pdf_analytical, "--", color="gray", linewidth=1.5,
-                 label=f"True PDF  σ={TRUE_SIGMA}, μ={TRUE_CENTER}")
-    axes[0].plot(x_fine, pdf_fitted, "-", color="tomato", linewidth=2,
-                 label=f"Fitted PDF  σ_RJ={rj['sigma_rj']:.3f}, μ={rj['mu']:.3f}")
+    axes[0].bar(
+        x,
+        pdf_numerical,
+        width=(x[1] - x[0]) * 0.9,
+        color="steelblue",
+        alpha=0.6,
+        label="−d(Fail Count)/dx  [numerical]",
+    )
+    axes[0].plot(
+        x_fine,
+        pdf_analytical,
+        "--",
+        color="gray",
+        linewidth=1.5,
+        label=f"True PDF  σ={TRUE_SIGMA}, μ={TRUE_CENTER}",
+    )
+    axes[0].plot(
+        x_fine,
+        pdf_fitted,
+        "-",
+        color="tomato",
+        linewidth=2,
+        label=f"Fitted PDF  σ_RJ={rj['sigma_rj']:.3f}, μ={rj['mu']:.3f}",
+    )
     axes[0].set_ylabel("Probability Density")
     axes[0].set_title("① Jitter Histogram  ( = −d(② Fail Count)/dx )")
     axes[0].axvline(TRUE_CENTER, color="gray", linestyle="--", linewidth=0.8)
@@ -252,8 +275,11 @@ def main():
         xy=(TRUE_CENTER, peak_h * 0.95),
         xytext=(TRUE_CENTER + 0.18, peak_h * 0.62),
         arrowprops=dict(arrowstyle="->", color="darkgreen", lw=1.5),
-        fontsize=8, color="darkgreen",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="honeydew", edgecolor="darkgreen", alpha=0.92),
+        fontsize=8,
+        color="darkgreen",
+        bbox=dict(
+            boxstyle="round,pad=0.3", facecolor="honeydew", edgecolor="darkgreen", alpha=0.92
+        ),
     )
     # ① アノテーション：左端の低い棒
     axes[0].annotate(
@@ -261,38 +287,66 @@ def main():
         xy=(0.07, peak_h * 0.015),
         xytext=(0.02, peak_h * 0.27),
         arrowprops=dict(arrowstyle="->", color="steelblue", lw=1.5),
-        fontsize=8, color="steelblue",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="aliceblue", edgecolor="steelblue", alpha=0.92),
+        fontsize=8,
+        color="steelblue",
+        bbox=dict(
+            boxstyle="round,pad=0.3", facecolor="aliceblue", edgecolor="steelblue", alpha=0.92
+        ),
     )
     # ① 説明ボックス
     axes[0].text(
-        0.99, 0.97,
+        0.99,
+        0.97,
         "棒の高さ ∝ Fail Countの傾きの急さ\n= ジッタがそこに存在する確率密度",
-        transform=axes[0].transAxes, fontsize=8, ha="right", va="top",
-        bbox=dict(boxstyle="round,pad=0.4", facecolor="lightyellow", edgecolor="orange", alpha=0.95),
+        transform=axes[0].transAxes,
+        fontsize=8,
+        ha="right",
+        va="top",
+        bbox=dict(
+            boxstyle="round,pad=0.4", facecolor="lightyellow", edgecolor="orange", alpha=0.95
+        ),
     )
 
     # ─── ② Fail Count ──────────────────────────────────────
     axes[1].plot(x, failcount, "o", color="steelblue", ms=5, label="Fail Count (measured)")
-    axes[1].plot(x_fine, fit_curve, "-", color="tomato", linewidth=2,
-                 label=f"Fitted  σ_RJ={rj['sigma_rj']:.3f}, μ={rj['mu']:.3f}")
-    axes[1].plot(x_fine, true_curve, "--", color="gray", linewidth=1.5,
-                 label=f"True    σ={TRUE_SIGMA}, μ={TRUE_CENTER}")
+    axes[1].plot(
+        x_fine,
+        fit_curve,
+        "-",
+        color="tomato",
+        linewidth=2,
+        label=f"Fitted  σ_RJ={rj['sigma_rj']:.3f}, μ={rj['mu']:.3f}",
+    )
+    axes[1].plot(
+        x_fine,
+        true_curve,
+        "--",
+        color="gray",
+        linewidth=1.5,
+        label=f"True    σ={TRUE_SIGMA}, μ={TRUE_CENTER}",
+    )
 
     # 中心での接線（傾きを可視化）
     tang_slope = -100.0 * sp_norm.pdf(TRUE_CENTER, loc=TRUE_CENTER, scale=TRUE_SIGMA)
     dx_tang = 0.065
     x_tang = np.array([TRUE_CENTER - dx_tang, TRUE_CENTER + dx_tang])
     y_tang = 50.0 + tang_slope * np.array([-dx_tang, dx_tang])
-    axes[1].plot(x_tang, y_tang, "-", color="darkgreen", linewidth=2.5,
-                 label=f"Tangent at μ  (slope ≈ {tang_slope:.0f})")
+    axes[1].plot(
+        x_tang,
+        y_tang,
+        "-",
+        color="darkgreen",
+        linewidth=2.5,
+        label=f"Tangent at μ  (slope ≈ {tang_slope:.0f})",
+    )
 
     axes[1].set_ylabel("Fail Count")
     axes[1].set_title("② Fail Count  (Complementary CDF)    Fail Count(x) = P(jitter > x)")
     axes[1].set_ylim(-5, 105)
     axes[1].axhline(50, color="gray", linestyle="--", linewidth=0.8, label="50% line")
-    axes[1].axvline(TRUE_CENTER, color="gray", linestyle="--", linewidth=0.8,
-                    label=f"center={TRUE_CENTER}")
+    axes[1].axvline(
+        TRUE_CENTER, color="gray", linestyle="--", linewidth=0.8, label=f"center={TRUE_CENTER}"
+    )
     axes[1].grid(True)
     axes[1].legend(fontsize=8)
 
@@ -302,8 +356,11 @@ def main():
         xy=(0.06, 97),
         xytext=(0.10, 68),
         arrowprops=dict(arrowstyle="->", color="steelblue", lw=1.5),
-        fontsize=8, color="steelblue",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="aliceblue", edgecolor="steelblue", alpha=0.92),
+        fontsize=8,
+        color="steelblue",
+        bbox=dict(
+            boxstyle="round,pad=0.3", facecolor="aliceblue", edgecolor="steelblue", alpha=0.92
+        ),
     )
     # ② アノテーション：中心 急峻
     axes[1].annotate(
@@ -311,8 +368,11 @@ def main():
         xy=(TRUE_CENTER, 50),
         xytext=(TRUE_CENTER + 0.16, 74),
         arrowprops=dict(arrowstyle="->", color="darkgreen", lw=1.5),
-        fontsize=8, color="darkgreen",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="honeydew", edgecolor="darkgreen", alpha=0.92),
+        fontsize=8,
+        color="darkgreen",
+        bbox=dict(
+            boxstyle="round,pad=0.3", facecolor="honeydew", edgecolor="darkgreen", alpha=0.92
+        ),
     )
     # ② アノテーション：右端 平坦
     axes[1].annotate(
@@ -320,22 +380,38 @@ def main():
         xy=(0.87, 3),
         xytext=(0.60, 22),
         arrowprops=dict(arrowstyle="->", color="steelblue", lw=1.5),
-        fontsize=8, color="steelblue",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="aliceblue", edgecolor="steelblue", alpha=0.92),
+        fontsize=8,
+        color="steelblue",
+        bbox=dict(
+            boxstyle="round,pad=0.3", facecolor="aliceblue", edgecolor="steelblue", alpha=0.92
+        ),
     )
     # ② 数式ボックス
     axes[1].text(
-        0.99, 0.04,
+        0.99,
+        0.04,
         "Fail Count(x) = max_fail × Q((x−μ)/σ_RJ)\n= max_fail × 0.5 × erfc((x−μ)/(σ√2))",
-        transform=axes[1].transAxes, fontsize=8, ha="right", va="bottom",
-        bbox=dict(boxstyle="round,pad=0.4", facecolor="lightyellow", edgecolor="orange", alpha=0.95),
+        transform=axes[1].transAxes,
+        fontsize=8,
+        ha="right",
+        va="bottom",
+        bbox=dict(
+            boxstyle="round,pad=0.4", facecolor="lightyellow", edgecolor="orange", alpha=0.95
+        ),
     )
 
     # ─── ③ Q-scale ─────────────────────────────────────────
-    axes[2].plot(rj["x_fit"], rj["q_inv_fit"], "o", color="steelblue", ms=5,
-                 label="Q⁻¹(BER)  measured")
-    axes[2].plot(rj["x_fit"], rj["q_inv_line"], "-", color="tomato", linewidth=2,
-                 label=f"Linear fit  slope=1/σ_RJ={1/rj['sigma_rj']:.2f},  R²={rj['r_squared']:.4f}")
+    axes[2].plot(
+        rj["x_fit"], rj["q_inv_fit"], "o", color="steelblue", ms=5, label="Q⁻¹(BER)  measured"
+    )
+    axes[2].plot(
+        rj["x_fit"],
+        rj["q_inv_line"],
+        "-",
+        color="tomato",
+        linewidth=2,
+        label=f"Linear fit  slope=1/σ_RJ={1/rj['sigma_rj']:.2f},  R²={rj['r_squared']:.4f}",
+    )
     axes[2].set_xlabel("x (normalized)")
     axes[2].set_ylabel("Q⁻¹(BER)")
     axes[2].set_title("③ Q-scale plot    Q⁻¹(BER) = (1/σ_RJ)×x − μ/σ_RJ   →   slope = 1/σ_RJ")
@@ -352,7 +428,8 @@ def main():
         xy=(ann_x, ann_y),
         xytext=(ann_x - 0.18, ann_y + 0.38),
         arrowprops=dict(arrowstyle="->", color="tomato", lw=1.5),
-        fontsize=8, color="tomato",
+        fontsize=8,
+        color="tomato",
         bbox=dict(boxstyle="round,pad=0.3", facecolor="mistyrose", edgecolor="tomato", alpha=0.92),
     )
     # ③ アノテーション：μ（y=0 交点）
@@ -361,15 +438,24 @@ def main():
         xy=(rj["mu"], 0.0),
         xytext=(rj["mu"] + 0.08, 0.55),
         arrowprops=dict(arrowstyle="->", color="darkgreen", lw=1.5),
-        fontsize=8, color="darkgreen",
-        bbox=dict(boxstyle="round,pad=0.3", facecolor="honeydew", edgecolor="darkgreen", alpha=0.92),
+        fontsize=8,
+        color="darkgreen",
+        bbox=dict(
+            boxstyle="round,pad=0.3", facecolor="honeydew", edgecolor="darkgreen", alpha=0.92
+        ),
     )
     # ③ 説明ボックス
     axes[2].text(
-        0.01, 0.97,
+        0.01,
+        0.97,
         "直線 = 純粋な RJ（ガウシアン）\n非直線 = DJ混在の可能性",
-        transform=axes[2].transAxes, fontsize=8, ha="left", va="top",
-        bbox=dict(boxstyle="round,pad=0.4", facecolor="lightyellow", edgecolor="orange", alpha=0.95),
+        transform=axes[2].transAxes,
+        fontsize=8,
+        ha="left",
+        va="top",
+        bbox=dict(
+            boxstyle="round,pad=0.4", facecolor="lightyellow", edgecolor="orange", alpha=0.95
+        ),
     )
 
     plt.tight_layout(rect=(0, 0, 1, 0.96), h_pad=4.5)
@@ -378,8 +464,9 @@ def main():
 
 def main2():
     import matplotlib.pyplot as plt
+
     failcount = [100, 80, 50, 20, 5, 1, 0]
-    x = [ -3, -2, -1, 0, 1, 2, 3]
+    x = [-3, -2, -1, 0, 1, 2, 3]
     print(x)
     fig, axes = plt.subplots(1, 1, figsize=(9, 16))
     axes.plot(x, failcount, "o-", color="steelblue", ms=5, label="Fail Count (measured)")

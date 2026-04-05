@@ -167,7 +167,7 @@ def plot_sine_edges_to_failcount(
         analysis.hist_centers,
         analysis.hist_density,
         width=bin_width * 0.90,
-        color="lightgray",
+        color="steelblue",
         alpha=0.85,
         edgecolor="white",
         label="Histogram density",
@@ -207,7 +207,6 @@ def main() -> None:
     fig.savefig(output_path, dpi=150, bbox_inches="tight")
     print(f"Saved: {output_path}")
     plt.show()
-
 
 if __name__ == "__main__":
     main()
