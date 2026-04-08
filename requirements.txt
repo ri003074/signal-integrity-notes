@@ -4,3 +4,4 @@ scipy
 japanize-matplotlib
 streamlit
 black
+Pillow
