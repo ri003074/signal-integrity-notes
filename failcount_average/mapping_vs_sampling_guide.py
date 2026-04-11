@@ -20,7 +20,7 @@ def main() -> None:
     y_quant = quantize_to_1mv(y_cont)
 
     x_target = 5.0
-    y_cont_target = continuous_mapping(np.array([x_target]))[0]     # 702.5
+    y_cont_target = continuous_mapping(np.array([x_target]))[0]  # 702.5
     y_quant_target = quantize_to_1mv(np.array([y_cont_target]))[0]  # 703.0
 
     fig, axes = plt.subplots(1, 2, figsize=(14, 5.5), constrained_layout=True)
@@ -30,17 +30,40 @@ def main() -> None:
     ax0 = axes[0]
     x_zoom = np.linspace(0, 10, 200)
     y_zoom = continuous_mapping(x_zoom)
-    ax0.plot(x_zoom, y_zoom, color="tab:blue", linewidth=2.2, label="Continuous mapping: y = 700 + 0.5x")
+    ax0.plot(
+        x_zoom, y_zoom, color="tab:blue", linewidth=2.2, label="Continuous mapping: y = 700 + 0.5x"
+    )
 
     y_grid = np.arange(700, 706, 1)
     for yv in y_grid:
         ax0.axhline(yv, color="lightgray", linewidth=0.9, linestyle="--", zorder=0)
 
-    ax0.scatter([x_target], [y_cont_target], s=80, color="tab:blue", zorder=5, label="x=5 -> y=702.5 (continuous)")
-    ax0.scatter([x_target], [y_quant_target], s=80, color="tab:orange", zorder=5, label="x=5 -> y=703 (1mV sampled)")
+    ax0.scatter(
+        [x_target],
+        [y_cont_target],
+        s=80,
+        color="tab:blue",
+        zorder=5,
+        label="x=5 -> y=702.5 (continuous)",
+    )
+    ax0.scatter(
+        [x_target],
+        [y_quant_target],
+        s=80,
+        color="tab:orange",
+        zorder=5,
+        label="x=5 -> y=703 (1mV sampled)",
+    )
 
     ax0.vlines(x_target, y_cont_target, y_quant_target, color="tab:red", linewidth=2)
-    ax0.text(x_target + 0.3, (y_cont_target + y_quant_target) / 2, "quantization\n+0.5 mV", color="tab:red", fontsize=9, va="center")
+    ax0.text(
+        x_target + 0.3,
+        (y_cont_target + y_quant_target) / 2,
+        "quantization\n+0.5 mV",
+        color="tab:red",
+        fontsize=9,
+        va="center",
+    )
 
     ax0.set_title("At x=5: 702.5 (continuous) vs 703 (sampled)")
     ax0.set_xlabel("X [mV]")
@@ -53,7 +76,9 @@ def main() -> None:
     # Right: full range comparison
     ax1 = axes[1]
     ax1.plot(x, y_cont, color="tab:blue", linewidth=2.0, label="Continuous mapping")
-    ax1.step(x, y_quant, where="post", color="tab:orange", linewidth=1.8, label="1mV sampled/quantized")
+    ax1.step(
+        x, y_quant, where="post", color="tab:orange", linewidth=1.8, label="1mV sampled/quantized"
+    )
 
     ax1.scatter([x_target], [y_cont_target], s=55, color="tab:blue", zorder=5)
     ax1.scatter([x_target], [y_quant_target], s=55, color="tab:orange", zorder=5)
@@ -82,4 +107,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
