@@ -11,8 +11,8 @@ def apply_averaging(df):
     index_min = df.index.min()
     index_max = df.index.max()
     for col in df.columns:
-        sum = df[col].sum()
-        avg = (1 - sum / max_fail) * (index_max - index_min) + index_min
+        sum_val = df[col].sum()
+        avg = (1 - sum_val / max_fail) * (index_max - index_min) + index_min
         df_avg[col] = [avg]
 
     df_avg.index = ["Average"]
