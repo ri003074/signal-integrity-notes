@@ -15,3 +15,4 @@ def build_sample_df() -> pd.DataFrame:
     columns = [0, 10, 20, 30, 40, 50]
     return pd.DataFrame(data, index=index, columns=columns)
 
+

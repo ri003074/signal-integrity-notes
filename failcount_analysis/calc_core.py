@@ -40,3 +40,4 @@ def calculate_gradient(df: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(ceiled_gradient, index=df.index[1:-1], columns=df.columns[1:-1])
 
+

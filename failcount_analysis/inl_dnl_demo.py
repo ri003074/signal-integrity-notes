@@ -1,8 +1,8 @@
 import numpy as np
 
 try:
-    from failcount_average.calc_core import AVERAGE_ROW_LABEL, apply_averaging
-    from failcount_average.sample_data import build_sample_df
+    from failcount_analysis.calc_core import AVERAGE_ROW_LABEL, apply_averaging
+    from failcount_analysis.sample_data import build_sample_df
 except ModuleNotFoundError:
     from calc_core import AVERAGE_ROW_LABEL, apply_averaging
     from sample_data import build_sample_df
@@ -92,4 +92,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
