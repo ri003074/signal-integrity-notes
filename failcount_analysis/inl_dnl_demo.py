@@ -1,10 +1,10 @@
 import numpy as np
 
 try:
-    from failcount_analysis.calc_core import AVERAGE_ROW_LABEL, apply_averaging
+    from failcount_analysis.calc_core import AVERAGE_ROW_LABEL, compute_average_index_per_code
     from failcount_analysis.sample_data import build_sample_df
 except ModuleNotFoundError:
-    from calc_core import AVERAGE_ROW_LABEL, apply_averaging
+    from calc_core import AVERAGE_ROW_LABEL, compute_average_index_per_code
     from sample_data import build_sample_df
 
 
@@ -22,7 +22,7 @@ def calc_inl_dnl(avg_values):
 
 def main() -> None:
     df = build_sample_df()
-    df_avg = apply_averaging(df)
+    df_avg = compute_average_index_per_code(df)
 
     codes = np.array(df_avg.columns, dtype=float)
     avg_values = df_avg.loc[AVERAGE_ROW_LABEL].values

@@ -4,10 +4,10 @@ import numpy as np
 import pandas as pd
 
 try:
-	from failcount_analysis.calc_core import AVERAGE_ROW_LABEL, apply_averaging, calculate_gradient
+	from failcount_analysis.calc_core import AVERAGE_ROW_LABEL, compute_average_index_per_code, compute_inner_gradient_norm
 	from failcount_analysis.sample_data import build_sample_df
 except ModuleNotFoundError:
-	from calc_core import AVERAGE_ROW_LABEL, apply_averaging, calculate_gradient
+	from calc_core import AVERAGE_ROW_LABEL, compute_average_index_per_code, compute_inner_gradient_norm
 	from sample_data import build_sample_df
 
 
@@ -89,8 +89,8 @@ def _plot_gradient_heatmap(source_df: pd.DataFrame, grad_df: pd.DataFrame) -> No
 
 def main() -> None:
 	df = build_sample_df()
-	df_avg = apply_averaging(df)
-	df_grad = calculate_gradient(df)
+	df_avg = compute_average_index_per_code(df)
+	df_grad = compute_inner_gradient_norm(df)
 
 	_print_dataframes(df, df_avg, df_grad)
 	_plot_average(df_avg)

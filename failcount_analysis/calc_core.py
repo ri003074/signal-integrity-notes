@@ -4,22 +4,22 @@ import pandas as pd
 AVERAGE_ROW_LABEL = "Average"
 
 
-def apply_averaging(df: pd.DataFrame) -> pd.DataFrame:
-    """Return 1-row DataFrame containing average index for each column."""
-    df_avg = pd.DataFrame()
-    index_count = len(df.index)
-    max_fail_per_cell = float(df.max().max())
-    max_fail_total = max_fail_per_cell * index_count
-    index_min = float(df.index.min())
-    index_max = float(df.index.max())
+def compute_average_index_per_code(df: pd.DataFrame) -> pd.DataFrame:
+    """Compute 1-row DataFrame of average index for each code column."""
+    averaged_df = pd.DataFrame()
+    row_count = len(df.index)
+    max_fail_value = float(df.max().max())
+    max_possible_fail_sum = max_fail_value * row_count
+    min_index_value = float(df.index.min())
+    max_index_value = float(df.index.max())
 
-    for col in df.columns:
-        col_sum = float(df[col].sum())
-        avg_index = (1 - col_sum / max_fail_total) * (index_max - index_min) + index_min
-        df_avg[col] = [avg_index]
+    for column_label in df.columns:
+        column_fail_sum = float(df[column_label].sum())
+        averaged_index = (1 - column_fail_sum / max_possible_fail_sum) * (max_index_value - min_index_value) + min_index_value
+        averaged_df[column_label] = [averaged_index]
 
-    df_avg.index = [AVERAGE_ROW_LABEL]
-    return df_avg
+    averaged_df.index = [AVERAGE_ROW_LABEL]
+    return averaged_df
 
 
 def _empty_inner_frame(df: pd.DataFrame) -> pd.DataFrame:
@@ -27,17 +27,27 @@ def _empty_inner_frame(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(columns=df.columns[1:-1], index=df.index[1:-1])
 
 
-def calculate_gradient(df: pd.DataFrame) -> pd.DataFrame:
+def compute_inner_gradient_norm(df: pd.DataFrame) -> pd.DataFrame:
     """Compute ceiled gradient norm on inner cells using central difference."""
     if df.empty or df.shape[0] < 3 or df.shape[1] < 3:
         return _empty_inner_frame(df)
 
-    data = df.to_numpy(dtype=float)
-    vertical = (data[:-2, 1:-1] - data[2:, 1:-1]) / 2.0
-    horizontal = (data[1:-1, 2:] - data[1:-1, :-2]) / 2.0
-    gradient_norm = np.sqrt(vertical**2 + horizontal**2)
-    ceiled_gradient = np.ceil(gradient_norm).astype(int)
+    values = df.to_numpy(dtype=float)
+    vertical_diff = (values[:-2, 1:-1] - values[2:, 1:-1]) / 2.0
+    horizontal_diff = (values[1:-1, 2:] - values[1:-1, :-2]) / 2.0
+    gradient_magnitude = np.sqrt(vertical_diff**2 + horizontal_diff**2)
+    ceiled_gradient_magnitude = np.ceil(gradient_magnitude).astype(int)
 
-    return pd.DataFrame(ceiled_gradient, index=df.index[1:-1], columns=df.columns[1:-1])
+    return pd.DataFrame(ceiled_gradient_magnitude, index=df.index[1:-1], columns=df.columns[1:-1])
+
+
+def apply_averaging(df: pd.DataFrame) -> pd.DataFrame:
+    """Backward-compatible alias for compute_average_index_per_code."""
+    return compute_average_index_per_code(df)
+
+
+def calculate_gradient(df: pd.DataFrame) -> pd.DataFrame:
+    """Backward-compatible alias for compute_inner_gradient_norm."""
+    return compute_inner_gradient_norm(df)
 
 
