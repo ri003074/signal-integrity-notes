@@ -64,8 +64,6 @@ def main() -> None:
     ax1.margins(x=0.02)
     ax1.set_box_aspect(1.0)
     ax1.grid(True, alpha=0.3)
-    for x, y in zip(codes, avg_values):
-        ax1.text(x, y + 1.0, f"{y:.1f}", ha="center", va="bottom", fontsize=8)
 
 
     # Panel 3: gradient norm map from center cells
