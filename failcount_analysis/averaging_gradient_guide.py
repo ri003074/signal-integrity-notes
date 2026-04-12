@@ -43,13 +43,14 @@ def main() -> None:
     ax0.set_yticklabels(df.index)
     for r in range(base_values.shape[0]):
         for c in range(base_values.shape[1]):
+            text_color = "black" if base_values[r, c] == 0 else "white"
             ax0.text(
                 c,
                 r,
                 str(int(base_values[r, c])),
                 ha="center",
                 va="center",
-                color="white",
+                color=text_color,
                 fontsize=8,
             )
 
@@ -86,13 +87,14 @@ def main() -> None:
     ax2.set_yticklabels(df_grad.index)
     for r in range(grad_values.shape[0]):
         for c in range(grad_values.shape[1]):
+            text_color = "black" if grad_values[r, c] == 0 else "white"
             ax2.text(
                 c,
                 r,
                 str(int(grad_values[r, c])),
                 ha="center",
                 va="center",
-                color="white",
+                color=text_color,
                 fontsize=8,
             )
 
