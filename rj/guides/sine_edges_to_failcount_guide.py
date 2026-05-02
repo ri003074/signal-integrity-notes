@@ -117,7 +117,7 @@ def plot_sine_edges_to_failcount(
     analysis: FailCountAnalysis,
 ) -> plt.Figure:
     """Plot the full chain: overlapped edges -> Fail Count -> histogram."""
-    fig, axes = plt.subplots(3, 1, figsize=(11, 11), constrained_layout=True)
+    fig, axes = plt.subplots(3, 1, figsize=(16, 9), constrained_layout=True)
 
     # 1) Overlapped sine edges.
     for trace in edge_data.traces:
@@ -204,7 +204,7 @@ def main() -> None:
     fig = plot_sine_edges_to_failcount(edge_data, analysis)
 
     output_path = Path(__file__).with_suffix(".png")
-    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    fig.savefig(output_path, dpi=150)
     print(f"Saved: {output_path}")
 
 if __name__ == "__main__":

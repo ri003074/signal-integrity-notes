@@ -23,7 +23,7 @@ def main() -> None:
     y_cont_target = continuous_mapping(np.array([x_target]))[0]  # 702.5
     y_quant_target = quantize_to_1mv(np.array([y_cont_target]))[0]  # 703.0
 
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(16, 9), constrained_layout=True)
     fig.suptitle("Continuous mapping vs 1mV sampled coordinates", fontsize=13, fontweight="bold")
 
     # Left: concept zoom around x=0..10

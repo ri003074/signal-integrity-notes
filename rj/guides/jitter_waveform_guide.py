@@ -168,7 +168,7 @@ def plot_jitter_waveform(
     zoom_ui_width: float = 16.0,
 ) -> plt.Figure:
     """Create a figure comparing ideal and jittered waveforms."""
-    fig, axes = plt.subplots(4, 1, figsize=(11, 13), constrained_layout=True)
+    fig, axes = plt.subplots(4, 1, figsize=(16, 9), constrained_layout=True)
 
     zoom_start = zoom_ui_start
     zoom_end = zoom_ui_start + zoom_ui_width
@@ -285,7 +285,7 @@ def main() -> None:
     fig = plot_jitter_waveform(data, sine_data)
 
     output_path = Path(__file__).with_suffix(".png")
-    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    fig.savefig(output_path, dpi=150)
     print(f"Saved: {output_path}")
 
 

@@ -12,7 +12,7 @@ import japanize_matplotlib  # noqa: F401
 
 
 def main():
-    fig = plt.figure(figsize=(14, 10))
+    fig = plt.figure(figsize=(16, 9))
     fig.suptitle(
         "積分と微分：PDF（ヒストグラム）と CDF（Fail Count）の関係\n"
         "積分と微分は互いに逆の操作！",
@@ -129,7 +129,7 @@ def main():
                   bbox=dict(boxstyle="round,pad=0.6", facecolor="white",
                             edgecolor="steelblue", alpha=0.97, linewidth=2))
 
-    plt.savefig("integration_differentiation_relation.png", dpi=150, bbox_inches="tight")
+    plt.savefig("integration_differentiation_relation.png", dpi=150)
     print("Saved: integration_differentiation_relation.png")
 
 

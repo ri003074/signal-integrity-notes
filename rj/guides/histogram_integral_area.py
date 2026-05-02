@@ -17,7 +17,7 @@ matplotlib.rcParams["axes.unicode_minus"] = False
 
 
 def main() -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5.5), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(16, 9), constrained_layout=True)
     fig.suptitle(
         "Area from integrating histogram = FailCount value\n"
         "histogram right-side area  =  F(x) height",
@@ -167,7 +167,7 @@ def main() -> None:
     )
 
     out = "histogram_integral_area.png"
-    fig.savefig(out, dpi=160, bbox_inches="tight")
+    fig.savefig(out, dpi=160)
     print(f"Saved: {out}")
 
 

@@ -26,7 +26,7 @@ import numpy as np
 try:
     import japanize_matplotlib  # noqa: F401
 
-    _JAPANESE = True
+    _JAPANESE = Truee
 except ImportError:
     _JAPANESE = False
 
@@ -304,8 +304,7 @@ def main() -> None:
 
     t = make_time(n_periods=5.0, n_points=5000)
     t_ns = t * 1e9  # 表示用 [ns]
-
-    fig, axes = plt.subplots(4, 1, figsize=(11, 20), constrained_layout=True)
+    fig, axes = plt.subplots(4, 1, figsize=(16, 9), constrained_layout=True)
 
     draw_block_diagram(axes[0])
     plot_incident_reflected(axes[1], t_ns, t)
@@ -321,7 +320,7 @@ def main() -> None:
     )
 
     out_path = Path(__file__).with_name("reflection_sine_sim.png")
-    fig.savefig(out_path, dpi=150, bbox_inches="tight")
+    fig.savefig(out_path, dpi=150)
     plt.close(fig)
     print(f"Saved: {out_path}")
 

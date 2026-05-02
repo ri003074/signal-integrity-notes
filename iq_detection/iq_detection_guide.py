@@ -104,7 +104,7 @@ def plot_iq_two_sines_guide(
 ) -> plt.Figure:
     """Two-sine case: IQ circle is visible."""
     plt.rcParams["axes.unicode_minus"] = False
-    fig, axes = plt.subplots(2, 1, figsize=(10, 9), constrained_layout=True)
+    fig, axes = plt.subplots(2, 1, figsize=(16, 9), constrained_layout=True)
 
     marker_labels = ["P1", "P2", "P3", "P4"]
     marker_colors = ["#d62728", "#1f77b4", "#2ca02c", "#ff7f0e"]
@@ -181,7 +181,7 @@ def plot_iq_single_sine_guide(
 ) -> plt.Figure:
     """Single-sine case: IQ trajectory collapses to a line."""
     plt.rcParams["axes.unicode_minus"] = False
-    fig, axes = plt.subplots(2, 1, figsize=(10, 9), constrained_layout=True)
+    fig, axes = plt.subplots(2, 1, figsize=(16, 9), constrained_layout=True)
 
     marker_labels = ["P1", "P2", "P3", "P4"]
     marker_colors = ["#d62728", "#1f77b4", "#2ca02c", "#ff7f0e"]
@@ -243,7 +243,7 @@ def plot_iq_stability_guide(
 ) -> plt.Figure:
     """Explain why IQ phase estimation is more stable than single-sine estimation."""
     plt.rcParams["axes.unicode_minus"] = False
-    fig, axes = plt.subplots(3, 1, figsize=(10.5, 12), constrained_layout=True)
+    fig, axes = plt.subplots(3, 1, figsize=(16, 9), constrained_layout=True)
 
     phase_deg = np.degrees(phase)
     one_period_mask = phase <= (2.0 * np.pi)
@@ -353,19 +353,19 @@ def main() -> None:
 
     two_sines_fig = plot_iq_two_sines_guide(t, i_signal, q_signal, phase, phase_shift_rad)
     two_sines_path = Path(__file__).with_name("iq_detection_two_sines_guide.png")
-    two_sines_fig.savefig(two_sines_path, dpi=150, bbox_inches="tight")
+    two_sines_fig.savefig(two_sines_path, dpi=150)
     plt.close(two_sines_fig)
     print(f"Saved: {two_sines_path}")
 
     single_sine_fig = plot_iq_single_sine_guide(t, i_signal, phase)
     single_sine_path = Path(__file__).with_name("iq_detection_single_sine_guide.png")
-    single_sine_fig.savefig(single_sine_path, dpi=150, bbox_inches="tight")
+    single_sine_fig.savefig(single_sine_path, dpi=150)
     plt.close(single_sine_fig)
     print(f"Saved: {single_sine_path}")
 
     stability_fig = plot_iq_stability_guide(t, i_signal, q_signal, phase)
     stability_path = Path(__file__).with_name("iq_detection_stability_guide.png")
-    stability_fig.savefig(stability_path, dpi=150, bbox_inches="tight")
+    stability_fig.savefig(stability_path, dpi=150)
     plt.close(stability_fig)
     print(f"Saved: {stability_path}")
 

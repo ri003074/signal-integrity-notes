@@ -214,7 +214,7 @@ def main():
     print(f"  R²                 : {rj['r_squared']:.6f}")
 
     # --- Plot ---
-    fig, axes = plt.subplots(3, 1, figsize=(9, 16))
+    fig, axes = plt.subplots(3, 1, figsize=(16, 9))
 
     x_fine = np.linspace(0, 1, 300)
     fit_curve = 100 * q_function((x_fine - rj["mu"]) / rj["sigma_rj"])
@@ -464,7 +464,7 @@ def main():
     from pathlib import Path
 
     output_path = Path(__file__).parent / "ber_analysis.png"
-    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    fig.savefig(output_path, dpi=150)
     print(f"Saved: {output_path}")
 
 
@@ -475,13 +475,13 @@ def main2():
     failcount = [100, 80, 50, 20, 5, 1, 0]
     x = [-3, -2, -1, 0, 1, 2, 3]
     print(x)
-    fig, axes = plt.subplots(1, 1, figsize=(9, 16))
+    fig, axes = plt.subplots(1, 1, figsize=(16, 9))
     axes.plot(x, failcount, "o-", color="steelblue", ms=5, label="Fail Count (measured)")
     axes.grid()
 
     # Save figure
     output_path = Path(__file__).parent / "ber_analysis_demo.png"
-    fig.savefig(output_path, dpi=150, bbox_inches="tight")
+    fig.savefig(output_path, dpi=150)
     print(f"Saved: {output_path}")
 
 

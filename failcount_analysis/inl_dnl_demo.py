@@ -38,7 +38,7 @@ def main() -> None:
 
     import matplotlib.pyplot as plt
 
-    fig, axes = plt.subplots(3, 1, figsize=(9, 10), constrained_layout=True)
+    fig, axes = plt.subplots(3, 1, figsize=(16, 9), constrained_layout=True)
     fig.suptitle("INL / DNL from FailCount Average", fontsize=13, fontweight="bold")
 
     ax0 = axes[0]

@@ -137,7 +137,7 @@ def main():
     freqs, S21_dB, S11_dB, S21_phase, gd_ns = create_sparam_data(f_c=F_C)
     freqs_GHz = freqs / 1e9
 
-    fig = plt.figure(figsize=(10, 20))
+    fig = plt.figure(figsize=(16, 9))
     fig.suptitle(
         "Sパラメータ (S-parameters) 解説\n" "2ポートネットワーク例：2次バターワースLPF  fc = 1 GHz",
         fontsize=12,
@@ -312,7 +312,7 @@ def main():
         ),
     )
 
-    plt.savefig("spara_guide.png", dpi=150, bbox_inches="tight")
+    plt.savefig("spara_guide.png", dpi=150)
     print("Saved: spara_guide.png")
 
 

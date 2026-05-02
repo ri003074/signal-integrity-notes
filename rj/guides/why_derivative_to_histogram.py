@@ -12,7 +12,7 @@ import japanize_matplotlib  # noqa: F401
 
 
 def main():
-    fig = plt.figure(figsize=(12, 10))
+    fig = plt.figure(figsize=(16, 9))
     fig.suptitle(
         "Fail Count を微分するとヒストグラムになる理由\n"
         "CDF（累積分布関数）→ 微分 → PDF（確率密度関数）",
@@ -159,7 +159,7 @@ def main():
 
     ax_slope.axis("off")
 
-    plt.savefig("why_derivative_to_histogram.png", dpi=150, bbox_inches="tight")
+    plt.savefig("why_derivative_to_histogram.png", dpi=150)
     print("Saved: why_derivative_to_histogram.png")
 
 

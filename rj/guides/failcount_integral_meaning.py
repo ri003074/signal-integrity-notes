@@ -36,7 +36,7 @@ plt.rcParams['font.size'] = 9
 
 
 def main() -> None:
-    fig = plt.figure(figsize=(16, 10), constrained_layout=True)
+    fig = plt.figure(figsize=(16, 9), constrained_layout=True)
     
     fig.suptitle(
         "Integral of FailCount: What is the area?\n"
@@ -290,7 +290,7 @@ REAL USE:
                    bbox=dict(boxstyle="round,pad=0.6", facecolor="mistyrose", alpha=0.95))
 
     out = "failcount_integral_meaning.png"
-    fig.savefig(out, dpi=150, bbox_inches="tight")
+    fig.savefig(out, dpi=150)
     print(f"Saved: {out}")
 
 

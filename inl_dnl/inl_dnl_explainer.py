@@ -42,7 +42,7 @@ def main() -> None:
     measured_levels = np.insert(np.cumsum(measured_steps), 0, 0.0)
     inl = (measured_levels - ideal_levels) / ideal_lsb
 
-    fig, axes = plt.subplots(2, 2, figsize=(14, 10), constrained_layout=True)
+    fig, axes = plt.subplots(2, 2, figsize=(16, 9), constrained_layout=True)
     fig.suptitle(
         "INL / DNL の基礎\nDNL: 各ステップ幅の誤差, INL: 累積したズレ",
         fontsize=14,
@@ -115,7 +115,7 @@ def main() -> None:
     )
 
     out = Path(__file__).with_name("inl_dnl_explanation.png")
-    fig.savefig(out, dpi=150, bbox_inches="tight")
+    fig.savefig(out, dpi=150)
     print("INL / DNL summary:")
     print(f"  DNL range: {np.min(dnl):+.2f} to {np.max(dnl):+.2f} LSB")
     print(f"  INL range: {np.min(inl):+.2f} to {np.max(inl):+.2f} LSB")

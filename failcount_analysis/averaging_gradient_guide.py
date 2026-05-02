@@ -19,7 +19,7 @@ def main() -> None:
     df_avg = compute_average_index_per_code(df)
     df_grad = compute_inner_gradient_norm(df)
 
-    fig, (ax0, ax1, ax2) = plt.subplots(1, 3, figsize=(16, 5.2), constrained_layout=True)
+    fig, (ax0, ax1, ax2) = plt.subplots(1, 3, figsize=(16, 9), constrained_layout=True)
 
     # Panel 1: original FailCount map
     base_values = df.to_numpy(dtype=float)

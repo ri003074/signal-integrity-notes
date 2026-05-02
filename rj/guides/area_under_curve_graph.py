@@ -35,7 +35,7 @@ matplotlib.rcParams['axes.unicode_minus'] = False
 
 
 def main() -> None:
-    fig, axes = plt.subplots(1, 3, figsize=(16, 5), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(16, 9), constrained_layout=True)
     fig.suptitle(
         "グラフの下の面積 = 積分の意味\n"
         "微分と積分は逆操作",
@@ -264,7 +264,7 @@ def main() -> None:
     )
 
     out = "area_under_curve_graph.png"
-    fig.savefig(out, dpi=160, bbox_inches="tight")
+    fig.savefig(out, dpi=160)
     print(f"Saved: {out}")
 
 

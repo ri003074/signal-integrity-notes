@@ -43,7 +43,7 @@ def main() -> None:
     f0 = f[i0]
     a0 = a[i0]
 
-    fig, axes = plt.subplots(1, 3, figsize=(15, 4.8), constrained_layout=True)
+    fig, axes = plt.subplots(1, 3, figsize=(16, 9), constrained_layout=True)
     fig.suptitle("FailCount and Integral Area", fontsize=13, fontweight="bold")
 
     # 1) PDF and right-tail area
@@ -115,7 +115,7 @@ def main() -> None:
     )
 
     out = "failcount_integral_area_guide.png"
-    fig.savefig(out, dpi=160, bbox_inches="tight")
+    fig.savefig(out, dpi=160)
     print(f"Saved: {out}")
 
 

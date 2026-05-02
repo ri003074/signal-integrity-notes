@@ -13,7 +13,7 @@ import japanize_matplotlib  # noqa: F401
 
 
 def main():
-    fig = plt.figure(figsize=(14, 11))
+    fig = plt.figure(figsize=(16, 9))
     fig.suptitle(
         "CDF（累積分布関数）= Fail Count（失敗数）\n"
         "なぜ同じなのか？具体例で理解する",
@@ -196,7 +196,7 @@ def main():
                         bbox=dict(boxstyle="round,pad=0.5", facecolor="lightyellow",
                                   edgecolor="orange", alpha=0.95))
 
-    plt.savefig("cdf_equals_failcount.png", dpi=150, bbox_inches="tight")
+    plt.savefig("cdf_equals_failcount.png", dpi=150)
     print("Saved: cdf_equals_failcount.png")
 
 
