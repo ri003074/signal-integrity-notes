@@ -32,6 +32,3 @@ Thumbs.db
 # Local environment files
 .env
 .env.*
-
-# Generated figures
-*png
